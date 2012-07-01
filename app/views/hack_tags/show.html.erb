@@ -1,0 +1,36 @@
+<%= @hack_tag.name %>
+<%= form_for @progre do |f| %>
+	<%= hidden_field_tag :done_by, params[:done_by] %>
+	<%= f.hidden_field :hack_tag_id, value: @hack_tag.id %>
+	<%= f.hidden_field :success, value: true %>
+	<%= f.hidden_field :done_at, value: Time.now %>
+	<%= f.collection_select :user_id, User.all, :id, :name %>
+	<%= f.submit "やったよ" %>
+<% end %>
+<% if @your_progre %>
+<%= hidden_field_tag :your_progre_done_at, @your_progre.done_at.to_i %>
+<%= form_for @your_progre do |f| %>
+	<%= f.text_field :comment %>
+	<%= f.submit "コメント" %>
+<% end %>
+<% end %>
+<div id="users">
+	<div id="first_user">
+		<%= @first_user.name %>
+		<% if @first_user.progres.done_today.present? %> やった <% else %> まだ <% end %>
+	</div>
+	<div id="second_user">
+		<%= @second_user.name %>
+		<% if @second_user.progres.done_today.present? %> やった <% else %> まだ <% end %>
+	</div>
+	<div id="third_user">
+		<%= @third_user.name %>
+		<% if @third_user.progres.done_today.present? %> やった <% else %> まだ <% end %>
+	</div>
+</div>
+
+<ul>
+<% @hack_tag.progres.each do |progre| %>
+	<li><%=progre.done_at%><%=progre.hack_tag.name%><%=progre.user.name%><%=progre.comment%></li>
+<% end %>
+</ul>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>LazyHackers | They need you need them.</title>
+  <%= stylesheet_link_tag    "application" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+<div class="navbar navbar-fixed-top">
+	<div class="navbar-inner">
+	<div id="user_nav" class="container">
+		<div id="login_box" class="btn-group pull-right">
+		<% if current_user %>
+			<a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+				<i class="icon-user"></i><%= current_user.name %>
+			</a>
+			<ul class="dropdown-menu">
+				<li><%= link_to "ログアウト", logout_path %></li>
+			</ul>
+		<% else %>
+			<%= form_tag "/auth/identity/callback", class:"form-inline" do %>
+			    <%= text_field_tag :auth_key, '', class:"input-small", placeholder:"メールアドレス" %>
+			    <%= password_field_tag :password, '', class:"input-small", placeholder:"パスワード" %>
+			  	<%= submit_tag "ログイン", name: "login" %>
+				<%= link_to "新規アカウント作成", new_identity_path, class:"btn-mini" %>
+			<% end %>
+		<% end %>
+		</div>
+	</div>
+	</div>
+</div>
+<div class="container">
+	<% flash.each do |name, msg| %>
+		<div class="alert alert-<%= name == :notice ? "success" : "error"%>">
+			<%= msg %>
+		</div>
+	<% end %>
+	<%= yield %>
+	<hr>
+	<h2>学びましょう。あなたが習慣化に悩んでいるものを、ある人は何気なくやっています。<br>
+		<small>あなたも、他の人ができないことを何気なくやっているのです。</small></h3>
+</div>
+
+</body>
+</html>

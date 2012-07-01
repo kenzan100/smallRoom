@@ -1,0 +1,44 @@
+<h3><%= @hack_tags.map(&:name).join(", ") %></h3>
+
+<% if @incomplete_hack_tags.present? %>
+	<%= form_for @progre do |f| %>
+		<%= hidden_field_tag :auto_done, params[:auto_done] %>
+		<% for hack_tag in @incomplete_hack_tags %>
+			<%= check_box_tag "hack_tag_ids[]", hack_tag.id %>
+			<%= hack_tag.name %>
+		<% end %>
+		<%= f.hidden_field :success, value: true %>
+		<%= f.hidden_field :done_at, value: Time.now %>
+		<%= f.hidden_field :user_id, value: @user.id %>
+		<%= f.submit "やったよ" %>
+	<% end %>
+<% else %>
+	<h4>今日の分は終わりです。おつかれさま！<small>それとも、<%=link_to "新しい習慣を登録", new_hack_tag_path %>する？</small></h4>
+<% end %>
+
+<% if @todays_your_last_progre %>
+	<%= hidden_field_tag :todays_your_last_progre_done_at, @todays_your_last_progre.done_at.to_i %>
+	<%= form_for @todays_your_last_progre do |f| %>
+		<%= f.text_field :comment %>
+		<%= f.submit "コメント" %>
+	<% end %>
+<% end %>
+
+<div id="users">
+	<div id="first_user">
+		<%= @user.name %>
+		<% if @user.progres.done_today.present? %> やった <% else %> まだ <% end %>
+	</div>
+	<% @friends && @friends.each_with_index do |friend, i| %>
+	<div id="friend_<%=i%>">
+		<%= friend.name %>
+		<% if friend.progres.done_today.present? %> やった<%=link_to "コツを尋ねる", ask_user_path(friend), method: "POST" %> <% else %> まだ <% end %>
+	</div>
+	<% end %>
+</div>
+
+<ul>
+<% @progres_records && @progres_records.each do |progre| %>
+	<li><%=progre.done_at%><%=progre.hack_tag.name%><%=progre.user.name%><%=progre.comment%></li>
+<% end %>
+</ul>

@@ -1,0 +1,46 @@
+<%= form_tag "/auth/identity/register", class:"form-horizontal" do %>
+<legend>新しいユーザー</legend>
+  <% if @identity && @identity.errors.any? %>
+    <div class="error_messages">
+      <h2><%= @identity.errors.count %>つのエラーがあります。</h2>
+      <ul>
+      <% @identity.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <%= hidden_field_tag :first_friend_id, params[:first_friend_id] %>
+  <div class="control-group <%if @hack_tag.blank?%>warning<%else%>success<%end%>">
+    <%= label_tag :my_custom, "あなたの習慣", class:"control-label" %>
+    <div class="controls">
+		<%= text_field_tag :my_custom, params[:my_custom], data:{provide:"typeahead", source:HackTag.all.map(&:name)}, autocomplete:"off" %>
+		<p class="help-block">
+			<% if @hack_tag.blank? %>
+				you're creating brand-new custom. you may want to stick with existing ones. if so, type something else above again.
+			<% else%>
+				you're good to go!
+			<% end %>
+		</p>
+	</div>
+  </div>
+  <div class="control-group">
+    <%= label_tag :name, "ニックネーム", class:"control-label" %>
+    <div class="controls"><%= text_field_tag :name, (params[:nick_name] || @identity.try(:name)) %></div>
+  </div>
+  <div class="control-group">
+    <%= label_tag :email, "メールアドレス", class:"control-label" %>
+    <div class="controls"><%= text_field_tag :email, @identity.try(:email) %></div>
+  </div>
+  <div class="control-group">
+    <%= label_tag :password, "パスワード", class:"control-label" %>
+    <div class="controls"><%= password_field_tag :password %></div>
+  </div>
+<!--
+  <div class="control-group">
+    <%= label_tag :password_confirmation, "パスワードの確認", class:"control-label" %>
+    <div class="controls"><%= password_field_tag :password_confirmation %></div>
+  </div>
+-->
+  <div class="form-actions"><%= submit_tag "Register" %></div>
+<% end %>
