@@ -1,3 +1,4 @@
+<% title @hack_tags.map(&:name).join(", ") %>
 <h3><%= @hack_tags.map(&:name).join(", ") %></h3>
 <%= hidden_field_tag :urge_add_to_home_screen_on_iOS, params[:auto_done] %>
 <% if @incomplete_hack_tags.present? %>
