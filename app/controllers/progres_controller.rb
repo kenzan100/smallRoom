@@ -25,9 +25,9 @@ class ProgresController < ApplicationController
             user.save!
           end
         end
-        redirect_to user_path(current_user), notice: "congrats!!!"
+        redirect_to user_path(current_user, auto_done:"t"), notice: "congrats!!!"
       else
-        redirect_to user_path(current_user), notice: "nice!"
+        redirect_to user_path(current_user, auto_done:"t"), notice: "nice!"
       end
     else
       redirect_to user_path(current_user), alert: "nothing done.."
