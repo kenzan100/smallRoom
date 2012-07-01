@@ -4,6 +4,10 @@
 
 jQuery ->
   #for users/show
+  if $('#urge_add_to_home_screen_on_iOS').attr("value")
+    console.log "hoge"
+    addToHome.show(true)
+  
   if $('form#new_progre #auto_done').attr("value")
     if $('input#todays_your_last_progre_done_at').length == 0
       $('html body div:first').hide().after("<div class='container'>now, sending your action..</p>")
