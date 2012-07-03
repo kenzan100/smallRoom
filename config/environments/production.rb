@@ -57,4 +57,11 @@ NewLzhs::Application.configure do
 
   # Send deprecation notices to registered listeners
   config.active_support.deprecation = :notify
+  
+  config.middleware.use ExceptionNotifier,
+    :email_prefix => "[Error] ",
+    :sender_address => %{"notifier" <s04155yo@gmail.com>},
+    :exception_recipients => %w{s04155yo@gmail.com}
+  
+  GA.tracker = "UA-33075452-1"
 end

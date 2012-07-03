@@ -1,5 +1,5 @@
 class Progre < ActiveRecord::Base
-  belongs_to :user
+  belongs_to :user, counter_cache: true
   belongs_to :hack_tag
   
   def self.done_today

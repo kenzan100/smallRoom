@@ -1,5 +1,5 @@
+<h2><%= @user.progres_count %>pts</h2>
 <% title @hack_tags.map(&:name).join(", ") %>
-<h3><%= @hack_tags.map(&:name).join(", ") %></h3>
 <%= hidden_field_tag :urge_add_to_home_screen_on_iOS, params[:auto_done] %>
 <% if @incomplete_hack_tags.present? %>
 	<%= form_for @progre do |f| %>
@@ -14,7 +14,7 @@
 		<%= f.submit "やったよ" %>
 	<% end %>
 <% else %>
-	<h4>今日の分は終わりです。おつかれさま！<small>それとも、<%=link_to "新しい習慣を登録", new_hack_tag_path %>する？</small></h4>
+	<h4>今日の分は終わりです。おつかれさま！<small>毎日続けると、<%=link_to "新しい習慣に挑戦する", new_hack_tag_path %>ことができます。</small></h4>
 <% end %>
 
 <% if @todays_your_last_progre %>
@@ -28,11 +28,13 @@
 <div id="users">
 	<div id="first_user">
 		<%= @user.name %>
+		<%= @hack_tags.map(&:name).join(", ") %>
 		<% if @user.progres.done_today.present? %> やった <% else %> まだ <% end %>
 	</div>
 	<% @friends && @friends.each_with_index do |friend, i| %>
 	<div id="friend_<%=i%>">
 		<%= friend.name %>
+		<%= friend.hack_tags.map(&:name).join(", ") %>
 		<% if friend.progres.done_today.present? %> やった<%=link_to "コツを尋ねる", ask_user_path(friend), method: "POST" %> <% else %> まだ <% end %>
 	</div>
 	<% end %>

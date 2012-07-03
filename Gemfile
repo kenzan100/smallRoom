@@ -42,3 +42,6 @@ gem "twitter-bootstrap-rails", :group => "assets"
 gem "simple_form"
 
 gem "omniauth-identity"
+gem "google-analytics-rails"
+
+gem "exception_notification"

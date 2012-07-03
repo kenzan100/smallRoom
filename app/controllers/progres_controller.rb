@@ -24,6 +24,7 @@ class ProgresController < ApplicationController
             user.last_time_congratted_at = Time.now
             user.save!
           end
+          user.congratted_count += 1
         end
         redirect_to user_path(current_user, auto_done:"t"), notice: "congrats!!!"
       else

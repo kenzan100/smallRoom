@@ -7,6 +7,7 @@
   <![endif]-->
   <%= stylesheet_link_tag    "application" %>
   <%= javascript_include_tag "application" %>
+  <%= analytics_init if Rails.env.production? %>
   <%= csrf_meta_tags %>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">

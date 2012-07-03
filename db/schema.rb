@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120701115932) do
+ActiveRecord::Schema.define(:version => 20120702035220) do
 
   create_table "customs", :force => true do |t|
     t.integer  "user_id"
@@ -62,6 +62,8 @@ ActiveRecord::Schema.define(:version => 20120701115932) do
     t.datetime "updated_at"
     t.integer  "friendships_count",       :default => 0
     t.datetime "last_time_congratted_at"
+    t.integer  "progres_count",           :default => 0
+    t.integer  "congratted_count",        :default => 0
   end
 
 end
