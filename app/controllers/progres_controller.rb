@@ -16,9 +16,9 @@ class ProgresController < ApplicationController
           last_progre = progre
         end
       end
-      if last_progre && last_progre.user.same_room_with.present? && (last_progre.user.same_room_with.map{|u| u.progres.done_today.present?}.index(false)) == nil
-        users = [last_progre.user, last_progre.user.same_room_with].flatten!
-        users.each do |user|
+      if last_progre && (last_progre.user.room.users.map{|u| u.progres.done_today.present?}.index(false)) == nil
+        users_awarded = last_progre.user.room.users
+        users_awarded.each do |user|
           if user.last_time_congratted_at.blank? || user.last_time_congratted_at < Time.now.beginning_of_day
             UserMailer.send_congrats(user, last_progre.user).deliver
             user.last_time_congratted_at = Time.now
