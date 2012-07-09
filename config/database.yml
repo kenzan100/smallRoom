@@ -40,14 +40,3 @@ test:
   pool: 5
   username: s04155yo
   password:
-
-production: 
-  adapter: postgresql
-  encoding: unicode
-  database: new_lzhs_production
-  pool: 5
-  username: s04155yo
-  password:
-
-
-

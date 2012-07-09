@@ -10,16 +10,16 @@
       </ul>
     </div>
   <% end %>
-  <%= hidden_field_tag :first_friend_id, params[:first_friend_id] %>
+  <%= hidden_field_tag :room_id, params[:room_id] %>
   <div class="control-group <%if @hack_tag.blank?%>warning<%else%>success<%end%>">
     <%= label_tag :my_custom, "あなたの習慣", class:"control-label" %>
     <div class="controls">
 		<%= text_field_tag :my_custom, params[:my_custom], data:{provide:"typeahead", source:HackTag.all.map(&:name)}, autocomplete:"off" %>
 		<p class="help-block">
 			<% if @hack_tag.blank? %>
-				you're creating brand-new custom. you may want to stick with existing ones. if so, type something else above again.
+				あなたが作ろうとしている習慣は，あなたが初めてです。他の名前で再度タイプすると、仲間が見つかりやすい習慣が作成できるかもしれません。
 			<% else%>
-				you're good to go!
+				あなたが報告する習慣には、すでに仲間がいるようです。良かった！
 			<% end %>
 		</p>
 	</div>
@@ -38,9 +38,9 @@
   </div>
 <!--
   <div class="control-group">
-    <%= label_tag :password_confirmation, "パスワードの確認", class:"control-label" %>
-    <div class="controls"><%= password_field_tag :password_confirmation %></div>
+    <%#= label_tag :password_confirmation, "パスワードの確認", class:"control-label" %>
+    <div class="controls"><%#= password_field_tag :password_confirmation %></div>
   </div>
 -->
-  <div class="form-actions"><%= submit_tag "Register" %></div>
+  <div class="form-actions"><%= submit_tag "登録" %></div>
 <% end %>

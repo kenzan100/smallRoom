@@ -1,20 +1,14 @@
-<% if @users_for_you && @users_for_you.friends.size == 1 %>
-<div id="second_user">
-	<h2><%=@users_for_you.friends.first.name%><small><%=@users_for_you.friends.first.hack_tags.map(&:name)%></small></h2>
-</div>
-|
-<% end %>
-<% if @users_for_you %>
-<div id="first_user">
-	<h2><%=@users_for_you.name%><small><%=@users_for_you.hack_tags.map(&:name)%></small></h2>
-</div>
-|
+<% @available_room && @available_room.users.each do |user| %>
+	<div class="user_profile">
+		<h2><%=user.name%><small><%=user.hack_tags.map(&:name).join(", ")%></small></h2>
+	</div>
+	|
 <% end %>
 <div id="and_you">
 	<h1><a href="#">私も参加する</a></h1>
 	<%= form_tag url_for(controller: "users", action: "create"), id:"new_user" do %>
-		<% if @users_for_you %>
-			<%= hidden_field_tag :first_friend_id, @users_for_you.id %>
+		<% if @available_room %>
+			<%= hidden_field_tag :room_id, @available_room.id %>
 		<% end %>
 		<%= text_field_tag :my_custom, "", placeholder: "あなたが毎日かかさずやっていることは？", data:{source:HackTag.all.map(&:name), provide: "typeahead"}, autocomplete:"off" %>
 		<%= text_field_tag :nick_name, "", placeholder: "あなたのニックネームは？" %>

@@ -10,15 +10,5 @@
 HackTag.delete_all
 User.delete_all
 
-# hack_tag = HackTag.create(name: "朝ご飯を食べる")
-# users = User.create([{
-#   provider: "lzh",
-#   name: "ちよこ"
-# },
-# {
-#   provider: "lzh",
-#   name: "あきこ"
-# }])
-# 
-# users.first.customs.create(hack_tag: hack_tag)
-# users.last.customs.create(hack_tag:  hack_tag)
+tacobeya = Room.create(tacobeya: true)
+

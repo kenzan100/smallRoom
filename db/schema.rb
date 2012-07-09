@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120702035220) do
+ActiveRecord::Schema.define(:version => 20120703051925) do
 
   create_table "customs", :force => true do |t|
     t.integer  "user_id"
@@ -52,6 +52,13 @@ ActiveRecord::Schema.define(:version => 20120702035220) do
     t.string   "comment"
   end
 
+  create_table "rooms", :force => true do |t|
+    t.integer  "users_count", :default => 0
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.boolean  "tacobeya",    :default => false
+  end
+
   create_table "users", :force => true do |t|
     t.string   "provider"
     t.string   "uid"
@@ -64,6 +71,8 @@ ActiveRecord::Schema.define(:version => 20120702035220) do
     t.datetime "last_time_congratted_at"
     t.integer  "progres_count",           :default => 0
     t.integer  "congratted_count",        :default => 0
+    t.boolean  "dropouted",               :default => false
+    t.integer  "room_id"
   end
 
 end

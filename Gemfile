@@ -45,3 +45,5 @@ gem "omniauth-identity"
 gem "google-analytics-rails"
 
 gem "exception_notification"
+
+gem "foreman"

@@ -9,5 +9,6 @@ describe "ElderReportsHerDoings" do
     # when everybody done, notify those 3
     # everypage can be bookmarked as a button to do a done action
     # suggest half done / half undone per day to adjust your best appropriate hack_tag set
+    
   end
 end

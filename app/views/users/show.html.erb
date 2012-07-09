@@ -25,17 +25,14 @@
 	<% end %>
 <% end %>
 
-<div id="users">
-	<div id="first_user">
-		<%= @user.name %>
-		<%= @hack_tags.map(&:name).join(", ") %>
-		<% if @user.progres.done_today.present? %> やった <% else %> まだ <% end %>
-	</div>
-	<% @friends && @friends.each_with_index do |friend, i| %>
-	<div id="friend_<%=i%>">
-		<%= friend.name %>
-		<%= friend.hack_tags.map(&:name).join(", ") %>
-		<% if friend.progres.done_today.present? %> やった<%=link_to "コツを尋ねる", ask_user_path(friend), method: "POST" %> <% else %> まだ <% end %>
+<div id="roommates">
+	<% @roommates.each do |user| %>
+	<div class="user_status" id="<%if @user.id == user.id %>you<%end%>">
+		<%= user.name %>
+		<%= user.hack_tags.map(&:name).join(", ") %>
+		<% if user.progres.done_today.present? %> やった<%unless @user.id == user.id%><%=link_to "コツを尋ねる", ask_user_path(user), method: "POST" %><%end%>
+		<% else %> まだ 
+		<% end %>
 	</div>
 	<% end %>
 </div>
